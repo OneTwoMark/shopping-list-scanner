@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Button } from 'react-native'
 import React, {useState, useEffect, use} from 'react'
 import { CameraView, Camera } from 'expo-camera'
+import { fetchProductData } from '../api/productApi';
 
 export default function Scan() {
     const [hasPermission, setHasPermission] = useState(null);
@@ -25,6 +26,7 @@ export default function Scan() {
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     console.log("data: ", data)
     console.log("type: ", type)
+    fetchProductData(data)
     setShowCamera(false)
     }
   };
