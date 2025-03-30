@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './Components/HomeScreen';
 import Scan from './Components/Scan';
 import List from './Components/List';
+import { ScannedProvider } from './contexts/scannedItems';
 
 const Tab = createBottomTabNavigator()
 
@@ -16,6 +17,7 @@ export default function App() {
 
 const MainApp = () => {
   return (
+  <ScannedProvider>
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
@@ -23,5 +25,6 @@ const MainApp = () => {
         <Tab.Screen name="List" component={List} />
       </Tab.Navigator>
     </NavigationContainer>
+  </ScannedProvider>
   )
 }
