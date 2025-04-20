@@ -26,16 +26,25 @@ export default function Scan() {
   }
 
   const handleBarcodeScanned = async ({ type, data }) => {
+    try {
     if (!lock) {
     lock = true;
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     console.log("data: ", data)
     console.log("type: ", type)
     const product = await fetchProductData(data)
-    console.log(product.product.brands)
     addItem(product.product)
     setShowCamera(false)
+    if (product.product) {
+      console.log("Product Name: ", product.product.product_name)
+      console.log("Product Brand: ", product.product.brands)
+      alert(`Product Name: ${product.product.product_name}`);
+    }
+  } 
+}
+    catch (error) {
+      // console.error("Error fetching product data:", error);
+      alert("Failed to fetch product data. Please try again.");
     }
   };
 

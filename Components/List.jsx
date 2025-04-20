@@ -1,31 +1,48 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import React, { useContext } from 'react'
 import ScannedContext from '../contexts/scannedItems';
 
 
 export default function List() {
-  const { scannedItems, setScannedItems } = useContext(ScannedContext);
+  const { scannedItems } = useContext(ScannedContext);
+  const totalFat = scannedItems.reduce((sum, item) => sum + (item.nutriments?.fat || 0), 0);
   return (
     <View style={styles.container}>
-      {
-        scannedItems.map((item, index) => (
-          <View key={`${item.id}-${index}`} style={styles.item}> {/* combined product id and index to avoid errors when duplicate scans */}
-            <Text style={styles.itemText}>
-              <Text style={styles.label}>Name: </Text>{item.brands || "Unknown"}
-              <Text style={styles.label}>Calories: </Text>{item.nutriments?.["energy-kcal"] || "N/A"}
-              <Text>Fat: </Text>{item.nutriments?.fat}
-            </Text>
+      <ScrollView>
+      {scannedItems.map((item, index) => (
+        <View key={`${item.id}-${index}`} style={styles.item}>
+          <View style={styles.type}>
+            <Text style={styles.label}>Item: </Text>
+            <Text>{item.product_name || "Unknown"}</Text>
           </View>
-        )
-    )}
+          <View style={styles.type}>
+            <Text style={styles.label}>Brand: </Text>
+            <Text>{item.brands || "Unknown"}</Text>
+          </View>
+          <View style={styles.type}>
+            <Text style={styles.label}>Calories: </Text>
+            <Text>{item.nutriments?.["energy-kcal"] || "N/A"}</Text>
+          </View>
+          <View style={styles.type}>
+            <Text style={styles.label}>Fat: </Text>
+            <Text>{item.nutriments?.fat || "N/A"}</Text>
+          </View>
+        </View>
+      ))}
+      </ScrollView> 
+      <View style={styles.banner}>
+        <Text style={styles.bannerText}>Total Fat: {totalFat}g</Text>
+      </View>
     </View>
-  )
+  );
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    paddingBottom: 50, 
     backgroundColor: '#f5f5f5', // Light gray background
   },
   header: {
@@ -49,10 +66,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555', // Medium gray text
     marginBottom: 4,
+    flexDirection: 'column'
   },
   label: {
     fontWeight: 'bold',
     color: '#000', // Black text for labels
+    flexDirection: 'column'
   },
   noItemsText: {
     fontSize: 18,
@@ -60,4 +79,23 @@ const styles = StyleSheet.create({
     color: '#888', // Lighter gray
     marginTop: 20,
   },
+  type: {
+    flexDirection: 'row',
+    marginBottom: 5
+  },
+  banner: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'black',
+    padding: 10,
+    alignItems: 'center',
+  },
+  bannerText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
+
