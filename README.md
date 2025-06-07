@@ -14,6 +14,6 @@ A mobile app that scans food items and retrieves nutritional information.
 - 🖼️ Add **optional images** for each scanned item
 - 🔑 Provide an **optional login** feature to **save** previous sessions
 
-----
+---- 
 
 Stay tuned for updates! ✨
