@@ -4,7 +4,7 @@ import React from 'react'
 export default function HomeScreen() {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Welcome to my barcode scanner</Text>
+      <Text>Start scanning to add items</Text>
     </View>
   )
 }

@@ -5,7 +5,7 @@ import ScannedContext from '../contexts/scannedItems';
 
 export default function List() {
   const { scannedItems } = useContext(ScannedContext);
-  const totalFat = scannedItems.reduce((sum, item) => sum + (item.nutriments?.fat || 0), 0);
+  const total = scannedItems.reduce((sum, item) => sum + (item.nutriments?.["energy-kcal"] || 0), 0);
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -31,7 +31,7 @@ export default function List() {
       ))}
       </ScrollView> 
       <View style={styles.banner}>
-        <Text style={styles.bannerText}>Total Fat: {totalFat}g</Text>
+        <Text style={styles.bannerText}>Total Calories: {total}</Text>
       </View>
     </View>
   );
