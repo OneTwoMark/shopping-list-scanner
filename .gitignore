@@ -36,3 +36,4 @@ yarn-error.*
 *.tsbuildinfo
 
 TODO.md
+features.todo
