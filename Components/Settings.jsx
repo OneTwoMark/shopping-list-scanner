@@ -3,7 +3,7 @@ import React from 'react'
 
 const Settings = () => {
   return (
-    <div>User Settings</div> // havent added to app.js yet 
+    <View>User Settings</View> // havent added to app.js yet 
   )
 }
 
