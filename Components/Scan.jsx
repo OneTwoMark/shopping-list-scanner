@@ -10,7 +10,7 @@ export default function Scan() {
     const [showCamera, setShowCamera] = useState(true)
     const { scannedItems, setScannedItems } = useContext(ScannedContext);
 
-    let lock = false; // lock variable ensures camera only scans once, by default it scans many times. 
+    let lock = false; // lock variable ensures camera only scans once in current render, by default it scans many times within the same render. 
 
   useEffect(() => {
     const getCameraPermissions = async () => {
@@ -29,7 +29,7 @@ export default function Scan() {
     try {
     if (!lock) {
     lock = true;
-    setScanned(true);
+    setScanned(true); // state change schedules re render of Scan() at end of this event handler (this function handleBarcodeScanned), so lock is false again allowing a rescan (alongside setScanned ofc).
     console.log("data: ", data)
     console.log("type: ", type)
     const product = await fetchProductData(data)
