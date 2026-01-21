@@ -6,8 +6,9 @@ const ScannedContext = createContext(null)
 export const ScannedProvider = ({ children }) => {
     const [scannedItems, setScannedItems] = useState([]);
   
-    const removeItem = (id, index) => {
-      setScannedItems(scannedItems.filter(item => !(item.id === id)))
+    const removeItem = (id, indexToRemove) => {
+      setScannedItems(currentList => currentList.filter((item, index) => !(item.id === id && index === indexToRemove))) 
+      // The first parameter you use when calling setState becomes the current value of that state, which is why currentList isnt definded anywhere. 
     }
 
     return (

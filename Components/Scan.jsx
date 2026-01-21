@@ -30,14 +30,14 @@ export default function Scan() {
     if (!lock) {
     lock = true;
     setScanned(true); // state change schedules re render of Scan() at end of this event handler (this function handleBarcodeScanned), so lock is false again allowing a rescan (alongside setScanned ofc).
-    console.log("data: ", data)
-    console.log("type: ", type)
+    // console.log("data: ", data)
+    // console.log("type: ", type)
     const product = await fetchProductData(data)
     addItem(product.product)
     setShowCamera(false)
     if (product.product) {
-      console.log("Product Name: ", product.product.product_name)
-      console.log("Product Brand: ", product.product.brands)
+      // console.log("Product Name: ", product.product.product_name)
+      // console.log("Product Brand: ", product.product.brands)
       alert(`Product Name: ${product.product.product_name}`);
     }
   } 

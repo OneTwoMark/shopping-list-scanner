@@ -30,7 +30,7 @@ export default function List() {
           <View>
             <Button
               title="Remove"
-              onPress={() => removeItem(item.id)}
+              onPress={() => removeItem(item.id, index)}
             />
           </View>
         </View>
