@@ -14,7 +14,7 @@ export const fetchProductData = async (barcode) => {
             throw new Error('Product not found')
         }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return; 
     }
 }

@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Button } from 'react-native'
 import React, { useContext } from 'react'
 import ScannedContext from '../contexts/scannedItems';
 
 
 export default function List() {
-  const { scannedItems } = useContext(ScannedContext);
-  const total = scannedItems.reduce((sum, item) => sum + (item.nutriments?.["energy-kcal"] || 0), 0);
+  const { scannedItems, removeItem } = useContext(ScannedContext);
+  const totalKcal = scannedItems.reduce((sum, item) => sum + (item.nutriments?.["energy-kcal"] || 0), 0);
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -27,11 +27,17 @@ export default function List() {
             <Text style={styles.label}>Fat: </Text>
             <Text>{item.nutriments?.fat || "N/A"}</Text>
           </View>
+          <View>
+            <Button
+              title="Remove"
+              onPress={() => removeItem(item.id)}
+            />
+          </View>
         </View>
       ))}
       </ScrollView> 
       <View style={styles.banner}>
-        <Text style={styles.bannerText}>Total Calories: {total}</Text>
+        <Text style={styles.bannerText}>Total Calories: {totalKcal}</Text>
       </View>
     </View>
   );
