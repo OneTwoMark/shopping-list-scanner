@@ -22,6 +22,7 @@ export default function Scan() {
   }, []);
 
   const addItem = (product) => {
+    console.log(product.nutriments)
     setScannedItems([...scannedItems, product])
   }
 
